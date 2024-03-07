@@ -1,0 +1,1 @@
+ This component involves cleaning and preparing gathered data for analysis. Tasks might include handling missing values, standardizing formats, and filtering relevant information.

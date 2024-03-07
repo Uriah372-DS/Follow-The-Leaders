@@ -1,0 +1,1 @@
+This directory is for code that is used across multiple components, such as helper functions for data manipulation, visualization tools, or custom analytics functions.

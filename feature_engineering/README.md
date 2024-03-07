@@ -1,0 +1,1 @@
+In this stage we select, modify, or create new features from our data that are necessary for our machine learning models. This could involve analyzing the importance of different factors in career progression, such as specific skills or experiences.
