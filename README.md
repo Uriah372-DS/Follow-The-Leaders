@@ -4,16 +4,16 @@
 
 ## Order of folders:
 1. **data_collection**
-   -  collecting_target_users.ipynb
+   -  collecting_target_users.py
 2. **data_preprocessing**
-   -  Analyzing Scraped Leaders.ipynb
+   -  Analyzing Scraped Leaders.py
 3. **search_engine**
-   -  BM25 Search Engine.ipynb
+   -  BM25 Search Engine.py
 4. **model_development:**
-   -  Unsupervised Topic Modeling.ipynb
-   -  LLM integration.ipynb
+   -  Unsupervised Topic Modeling.py
+   -  LLM integration.py
 5. **evaluation**
-   - Search Engine Evaluation using Clustering Methods.ipynb
+   - Search Engine Evaluation using Clustering Methods.py
 
 ### Additional folders:
 - **utils**
