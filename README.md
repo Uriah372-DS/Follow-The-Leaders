@@ -5,7 +5,6 @@
 ## Order of folders:
 1. **data_collection**
    -  collecting_target_users.ipynb
-   -  scraping leaders.ipynb
 2. **data_preprocessing**
    -  Analyzing Scraped Leaders.ipynb
 3. **search_engine**
