@@ -1,1 +1,0 @@
- This component involves gathering the necessary data, which may include user profiles, educational background, career histories, skills, and so on. Tasks might include handling missing values, standardizing formats, and filtering relevant information.
