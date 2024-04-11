@@ -11,7 +11,7 @@
 3. [Project Phases](#project-phases)
    - [1. Data Collection](#1.-data-collection)
    - [2. Data Analysis](#2.-data-analysis)
-   - [3. Recommendation Engine](#3.-recommendation-engine)
+   - [3. Recommendation Engine (Contains Important Notice)](#3.-recommendation-engine)
 4. [Running the Notebooks](#running-the-notebooks)
 5. [Dependencies](#dependencies)
 
@@ -63,7 +63,7 @@ This project is organized into a series of Databricks notebooks, each serving a 
 ### Additional Directories:
 
 - **Utils**
-   - `constants.py`: IMPORTANT! Contains constants used across multiple notebooks, such as paths in which to save the data and though which to access project diectories.
+   - `constants.py`: IMPORTANT! Contains constants used across multiple notebooks, such as paths in which to save the data and through which to access project diectories.
 
 - **Local Data**
    - Directory storing raw and cleaned scraped leader profiles for processing.
