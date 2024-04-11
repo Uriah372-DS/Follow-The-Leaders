@@ -1,5 +1,13 @@
-<h1 align="center">Follow The Leaders</h1>
+<h1 align="center" style="text-align:center; font-weight:bold; font-size:2.5em">Follow The Leaders</h1>
 
+<p align='center' style="text-align:center;font-size:1em;">
+    <a>Uriah Asulin</a>&nbsp;,&nbsp;
+    <a>Guy Shoef</a>&nbsp;,&nbsp;
+    <a>Omer Yom Tov</a>&nbsp;,&nbsp;
+    <br/> 
+    Technion – Israel Institute of Technology<br/> 
+    
+</p>
 ---
 
 ## Outline
