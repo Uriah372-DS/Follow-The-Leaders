@@ -14,13 +14,13 @@
 2. [Project Structure](#project-structure)
    - [Order of Notebooks](#order-of-notebooks)
    - [Additional Directories](#additional-directories)
-   - [Getting Started in Databricks](#getting-started-in-databricks)
-3. [Project Phases](#project-phases)
+3. [Exploring The Project in Databricks](#exploring-the-project-in-databricks)
+4. [Project Phases](#project-phases)
    - [Data Collection](#data-collection)
    - [Data Analysis](#data-analysis)
    - [Recommendation Engine](#recommendation-engine)
-4. [Running the Notebooks (Contains Important Notice)](#running-the-notebooks)
-5. [Dependencies](#dependencies)
+5. [Running the Notebooks (Contains Important Notice)](#running-the-notebooks)
+6. [Dependencies](#dependencies)
 
 ---
 
@@ -75,7 +75,9 @@ This project is organized into a series of Databricks notebooks, each serving a 
 - **Local Data**
    - Directory storing raw and cleaned scraped leader profiles for processing.
 
-## Getting Started in Databricks
+---
+
+# Exploring The Project in Databricks
 
 To explore the notebooks effectively:
 1. Clone the repository into your Databricks environment.
