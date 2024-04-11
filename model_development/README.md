@@ -1,1 +1,0 @@
-This component is where we will develop and train our machine learning models to predict the steps a user needs to take to achieve their professional goals, based on the paths taken by their matched leaders.
