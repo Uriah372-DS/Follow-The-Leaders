@@ -59,7 +59,7 @@ Ensure you have Python installed, along with the library:
 Optional:
 
 For running the notebook `Testing Open-Source Tools` inside the search_engine directory, add these lines into your init script:
-`# Directory where libraries will be stored
+```# Directory where libraries will be stored
 lib_dir="/databricks/jars"
 
 # Create the directory if it doesn't exist
@@ -99,4 +99,4 @@ curl -L -o $lib_dir/scalactic_2.12-3.2.17.jar "https://repo1.maven.org/maven2/or
 
 # Scalatest
 curl -L -o $lib_dir/scalatest_2.12-3.2.17.jar "https://repo1.maven.org/maven2/org/scalatest/scalatest_2.12/3.2.17/scalatest_2.12-3.2.17.jar"
-`
+```
