@@ -11,8 +11,8 @@
 3. [Project Phases](#project-phases)
    - [1. Data Collection](#1.-data-collection)
    - [2. Data Analysis](#2.-data-analysis)
-   - [3. Recommendation Engine (Contains Important Notice)](#3.-recommendation-engine)
-4. [Running the Notebooks](#running-the-notebooks)
+   - [3. Recommendation Engine](#3.-recommendation-engine)
+4. [Running the Notebooks (Contains Important Notice)](#running-the-notebooks)
 5. [Dependencies](#dependencies)
 
 ---
