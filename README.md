@@ -46,7 +46,7 @@ To explore the notebooks effectively:
 ## Running the Notebooks
 
 *IMPORTANT!*
-Before running any of the notebooks you must edit the following values of the constants in `Utils` -> `constants.py`
+Before running any of the notebooks you must edit the values of the constants in `Utils` -> `constants.py`. More detailed instructions inside the `constants.py` file.
 
 Each notebook is designed to be semi-self-contained but follows the logical progression described above. Ensure you run the notebooks in the specified order to maintain data integrity and flow throughout the project.
 This is exluding the Flowchat_colab notebook, which can be run entirely independently of the rest of the notebooks in a google-colab environment.
