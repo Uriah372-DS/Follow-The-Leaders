@@ -161,7 +161,11 @@ To enhance the LLM’s effectiveness, we employ a "Chain of Thoughts" (CoT) prom
 
 #### Career Path Generation
 
-Once primed, the LLM proceeds to the final and most critical task: building a detailed career path. This path includes specific steps, milestones, and recommendations, which are directly influenced by the themes and patterns identified among industry leaders. The career path is visualized in a user-friendly format, making it easy for users to follow and understand.
+Once primed, the LLM proceeds to the final and most critical task: building a detailed career path. This path includes specific steps, milestones, and recommendations, which are directly influenced by the themes and patterns identified among industry leaders. 
+
+#### Career Path Visualization
+
+The career path is visualized in a user-friendly format, making it easy for users to follow and understand. We made a simple web UI using Dash & Plotly, that can be viewed in the `Flowchart_colab` notebook in a google-colab environment. It showcases the idea we had in mind then presenting the career path to the user. Our prime motivation for using these tools in our proof-of-concept was that the final result should be interactive so as to not overload the user and to help him focus on one step at a time. Another motivation was showing that our prompt engineering gave a structured LLM response that can be parsed and then visualized inside predefined web components, which requires the LLM to be predictable and concise.
 
 ### Personalization
 
@@ -184,7 +188,7 @@ This is exluding the Flowchat_colab notebook, which can be run entirely independ
 # Dependencies
 
 Ensure you have Python installed, along with the library:
-- pip install sparkml-base-classes  # You can simply add it to the local / global init script of you cluster, or manually add it in every notebook that you wish to run
+- `pip install sparkml-base-classes  # You can simply add it to the local / global init script of you cluster, or manually add it in every notebook that you wish to run`
 
 Optional:
 
