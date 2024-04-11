@@ -8,7 +8,6 @@
     Technion – Israel Institute of Technology<br/> 
     
 </p>
----
 
 ## Outline
 1. [Project Overview](#project-overview)
