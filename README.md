@@ -16,9 +16,9 @@
    - [Additional Directories](#additional-directories)
    - [Getting Started in Databricks](#getting-started-in-databricks)
 3. [Project Phases](#project-phases)
-   - [1. Data Collection](#1.-data-collection)
-   - [2. Data Analysis](#2.-data-analysis)
-   - [3. Recommendation Engine](#3.-recommendation-engine)
+   - [Data Collection](#data-collection)
+   - [Data Analysis](#data-analysis)
+   - [Recommendation Engine](#recommendation-engine)
 4. [Running the Notebooks (Contains Important Notice)](#running-the-notebooks)
 5. [Dependencies](#dependencies)
 
@@ -85,7 +85,7 @@ To explore the notebooks effectively:
 ---
 
 # Project Phases
-## 1. Data Collection
+## Data Collection
 
 ### Overview
 
@@ -109,7 +109,7 @@ This meticulous approach to data collection ensures that "Follow The Leaders" is
 
 ---
 
-## 2. Data Analysis
+## Data Analysis
 
 ### Overview
 
@@ -143,7 +143,7 @@ This analytical approach not only ensures that our recommendations are grounded 
 
 ---
 
-## 3. Recommendation Engine
+## Recommendation Engine
 
 ### Overview
 
