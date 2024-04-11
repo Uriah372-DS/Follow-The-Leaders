@@ -194,7 +194,7 @@ Ensure you have Python installed, along with the library:
 
 Optional:
 
-For running the notebook `Testing Open-Source Tools` inside the search_engine directory, add these lines into your init script:
+For running the notebook `Testing Open-Source Tools` inside the search_engine directory, add these lines into your init script in databricks:
 ```# Directory where libraries will be stored
 lib_dir="/databricks/jars"
 
@@ -237,4 +237,5 @@ curl -L -o $lib_dir/scalactic_2.12-3.2.17.jar "https://repo1.maven.org/maven2/or
 curl -L -o $lib_dir/scalatest_2.12-3.2.17.jar "https://repo1.maven.org/maven2/org/scalatest/scalatest_2.12/3.2.17/scalatest_2.12-3.2.17.jar"
 ```
 
----
+The notebook `Testing Open-Source Tools` was used for trying an open-source library called [[spark-lucenerdd](https://github.com/zouzias/spark-lucenerdd)] which integrates the apache lucene search software with spark, offering a few basic search functionalities, However, it turned out to be less efficient then our native implementation using a UDF, possibly because of redundunt shuffling under the hood.
+
