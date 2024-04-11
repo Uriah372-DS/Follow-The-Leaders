@@ -1,1 +1,0 @@
-In this part we parse and visualize the results of the LLM for the user to explore in a visually-appealing way.
