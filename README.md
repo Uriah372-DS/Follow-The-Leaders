@@ -1,4 +1,4 @@
-# Follow The Leaders
+<h1 align="center"># Follow The Leaders</h1>
 
 ---
 
