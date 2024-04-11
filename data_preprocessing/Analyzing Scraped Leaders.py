@@ -51,6 +51,7 @@ print(unscraped_columns)
 # Not named correctly:
 # scraped = scraped.withColumnRenamed("current_company_company_id", "current_company:company_id")
 # scraped = scraped.withColumnRenamed("current_company_name", "current_company:name")
+
 # Can be parsed into corresponding columns:
 # scraped = scraped.withColumn("url", F.col("input.url")).drop("input")
 
@@ -254,7 +255,11 @@ def udf_supporting_transform(df: pyspark.sql.DataFrame,
                              f: Union[Callable[[pyspark.sql.Column], pyspark.sql.Column], 
                                       Callable[[pyspark.sql.Column, pyspark.sql.Column], pyspark.sql.Column]],
                              element_type: str) -> pyspark.sql.Column:
-
+    """
+     In a typically annoying fashion, pyspark doesn't support activating a UDF on elements of an array column inside the transform function, 
+     So for our use-case we created this function to bypass this restriction. 
+     It almost bypasses it completely, but it doesn't preserve null values in the array. It just removes them together with the padding.
+    """
     temp_column = str((hash(str(col)) + int(np.random.randint(low=np.iinfo(np.int64).min, high=np.iinfo(np.int64).max))))
     max_length = df.select(F.max(F.size(col))).collect()[0][0]
 
@@ -321,6 +326,11 @@ def parse_struct_column(df: pyspark.sql.DataFrame, column_name: Union[str, pyspa
     return column_expr
 
 def parse_columns(df: pyspark.sql.DataFrame) -> pyspark.sql.DataFrame:
+    """
+     This function parses ALL of the string columns in the dataframe (yes, even the nested fields) and converts them into pythonic strings without any tags.
+     It does this in a mutually recursive fashion and was an absolute headache to debug, but it is also very clever and extendable, and can work with any arbitrary UDF that you wish to activate on every string column in the dataframe.
+     I took inspiration from the pyspark.sql.functions.fromJson function When building this function, which if you look inside the pyspark source code you'll find that is also a mutually recursive function, and it does so by having a function for each data-type and having them call each-other recursively.
+    """
     ddf = df.select("*")  # copy df
     for column_name, column_type in df.dtypes:
         if column_type.startswith('string'):
@@ -386,33 +396,3 @@ for c, c2 in [
     condition = condition | ((F.size(F.col(c)) > 0) & (F.size(F.array_except(F.col(c2), F.col(c))) > 0))
 perc_modified = round(100 * comparisons.where(condition).count() / comparisons.count(), 2)
 print("Percentage of Modified Array Columns:", str(perc_modified) + '%')
-
-# COMMAND ----------
-
-comparisons = comparisons.cache()
-
-# COMMAND ----------
-
-companies = spark.read.parquet('/linkedin/companies')
-@F.udf(returnType=StringType())
-def meta_industry(val):
-    if val is not None:
-        return META_INDUSTRIES_DICT[val]
-    return val
-
-companies = companies.withColumn("meta_industry", meta_industry(F.col("industries")))
-companies.display()
-
-# COMMAND ----------
-
-other = companies.select(F.col("id").alias("current_company:company_id"), "organization_type", "industries", "meta_industry")
-comparisons = comparisons.join(other=other,
-                               on="current_company:company_id")
-
-# COMMAND ----------
-
-comparisons.printSchema()
-
-# COMMAND ----------
-
-display(comparisons.drop("name"))

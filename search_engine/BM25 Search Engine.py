@@ -19,44 +19,6 @@ display(spark)
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC Brainstorm:
-# MAGIC 1. As input we get a meta industry - filter data based on this to kick out evey profile not with this meta industry.
-# MAGIC 2. Tokenize + Word embedding for degree in education + features about rank (bachelor's, masters...)
-# MAGIC 3. TF IDF to about section (Assuming it will be filled), then in the input we feed keywords about 
-# MAGIC 4. word embedding and analyzing position column.
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC Field Features:
-# MAGIC * What fields do you want to work in (example: Data Sceicnce, Algorithms, Electrical Engineering,...)
-# MAGIC * What academic aspirations you have (Bachelor, Master, PHD, what field, universty,...)
-# MAGIC * What positions do you want to hold (Software Engineer, Data Sceinetist,...)
-# MAGIC * What companies do you wish to work for (Google, Amazon, Meta,...)
-# MAGIC
-# MAGIC Leader Features:
-# MAGIC *  Number of followers
-# MAGIC * Length of 'experience' column
-# MAGIC * Current Company (If the company is 'good')
-# MAGIC * Level of education (Has an advenced degree)
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC *Important - MAKE INPUT SIMPLE AND EXPRESSIVE*
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC Pipeline:
-# MAGIC 1. Filter data based on meta-industry input
-# MAGIC 2. Use TF-IDF to score users based on their relevance (input from user - term, data - document)
-# MAGIC   alternative: Use embeddings to analyize similarity between textual data.
-# MAGIC 3. filter based on leader features (take those with ) 
-
-# COMMAND ----------
-
-# MAGIC %md
 # MAGIC # BM25 Retrieval
 
 # COMMAND ----------
@@ -252,6 +214,11 @@ result1.display()
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC This took approximately 1.5 minutes for the retrieval
+
+# COMMAND ----------
+
+# MAGIC %md
 # MAGIC ### Option 2 - With UDF
 
 # COMMAND ----------
@@ -368,54 +335,7 @@ display(result2)
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ### Corpus Visualizations:
-
-# COMMAND ----------
-
-from pyspark.ml.clustering import BisectingKMeans, LDA
-
-# COMMAND ----------
-
-latantDir = LDA(featuresCol="position_tf_vector").fit(indexed_corpus)
-
-# COMMAND ----------
-
-TFModel = None
-for stage in indexing_pipeline.getPipeline().stages:
-    if isinstance(stage, CountVectorizerModel):
-        TFModel = stage
-        break
-index2term = TFModel.vocabulary
-
-# COMMAND ----------
-
-topn_terms = 20
-topics_df = latantDir.describeTopics(topn_terms).toPandas()
-topics_df
-
-# COMMAND ----------
-
-topics_df["terms"] = topics_df.apply(func=lambda x: [index2term[x['termIndices'][i]] for i in range(len(x['termIndices']))], axis=1)
-by_topic = pd.DataFrame(index=range(topn_terms), columns=topics_df[['topic', 'terms']].T.columns)
-
-for c in by_topic.columns:
-    by_topic[c] = topics_df[['topic', 'terms']].T.at['terms', c]
-by_topic
-
-# COMMAND ----------
-
-bisectKM = BisectingKMeans(k=10, featuresCol="position_tfidf_vector", predictionCol="bisectKM_predictions").fit(indexed_corpus)
-
-# COMMAND ----------
-
-from pyspark.ml.evaluation import ClusteringEvaluator
-# Sum of squared distances between the input points and their corresponding cluster centers:
-ClusteringEvaluator(featuresCol="position_tfidf_vector", predictionCol="bisectKM_predictions").evaluate(dataset=bisectKM.transform(indexed_corpus))
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC Pretty bad clustering...
+# MAGIC This took approximately 35 seconds for the retrieval!
 
 # COMMAND ----------
 
@@ -538,11 +458,19 @@ results.replace(float('nan'), None).summary("count").display()
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC Notice that for every pair of query-field and relevant indexed column there are 2 new columns - one for the rsv and one for the rank. These correspond to the different Retrieved lists as we described in the report in the fusion section.
+# MAGIC
+# MAGIC Also, notice that there are 296 distinct ids in the retrieved results, indicating that some of the user profiles appear in more than one of the retrieved lists! This use-case highlights the relevance of the fusion method to our search engine.
+
+# COMMAND ----------
+
+# MAGIC %md
 # MAGIC ## Fusion
 
 # COMMAND ----------
 
 def reciprocal_rank(retrieved_profiles: pyspark.sql.DataFrame, v: float):
+    """ Fuse the retrieved lists using the Reciprocal-Rank fusion method. """
     return retrieved_profiles.withColumn("fused_rank", sum([F.when(F.col(c).isNotNull(), 1/(F.col(c) + v)).otherwise(0) for c in retrieved_profiles.columns if c.endswith("rank")]))
 
 # COMMAND ----------
